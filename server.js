@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 const express = require('express')
 const app = express();
 const cors = require('cors')
@@ -6,7 +8,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const User = require('./model')
 
-mongoose.connect('mongodb://localhost/pagination', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopology: true})
 
 const db = mongoose.connection
 db.on('error', error =>  console.log(error))
@@ -50,4 +52,4 @@ app.use('/', require('./route'))
 
 
 
-app.listen(3000)
+app.listen(process.env.PORT || 3000)
